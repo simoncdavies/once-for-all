@@ -1,0 +1,16 @@
+.compliance-icon {
+    position: absolute;
+    right: 16px;
+}
+
+.compliance-icon--verified {
+    color: green;
+}
+
+.compliance-icon--pending {
+    color: orange;
+}
+
+.compliance-icon--not-verified {
+    color: red;
+}

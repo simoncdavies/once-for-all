@@ -1,6 +1,8 @@
-export type Country = "UK" | "FR" | "ES" | "DE" | "IE";
+export const COUNTRIES = ["UK", "FR", "ES", "DE", "IE"] as const;
+export type Country = typeof COUNTRIES[number];
 
-export type ComplianceStatus = "Verified" | "Pending" | "NotVerified";
+export const COMPLIANCE_STATUSES = ["Verified", "Pending", "NotVerified"] as const;
+export type ComplianceStatus = typeof COMPLIANCE_STATUSES[number];
 
 export type Supplier = {
   id: string;

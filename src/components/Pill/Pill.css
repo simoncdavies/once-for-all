@@ -1,0 +1,13 @@
+.pill {
+    font-size: 11px;
+    border-radius: 999px;
+    margin-right: 4px;
+    padding: 2px 4px;
+    background-color: #f5f5f5;
+    border: 1px solid #ccc;
+    display: inline-block;
+}
+
+.pill:last-child {
+    margin-right: 0;
+}

@@ -1,23 +1,36 @@
-// use fetch to get suppliers from api, .env file has API_URL
 import { useEffect, useState } from "react";
-import { Supplier } from "./types/supplier";
+import { Routes, Route } from "react-router-dom";
+import { SupplierForm } from "./components/SupplierForm";
+import { SupplierSearch } from "./components/SupplierSearch";
+import { SuppliersList } from "./components/SuppliersList";
+import { useSuppliers } from "./context/suppliers";
+import { SupplierDetail } from "./components/SupplierDetail";
 
 export function App() {
-  const [suppliers, setSuppliers] = useState<Supplier[]>([]);
+  const { suppliers, loading, error } = useSuppliers();
+  const [hasLoaded, setHasLoaded] = useState(false);
+
   useEffect(() => {
-    fetch(`${process.env.API_URL}/suppliers`)
-      .then((res) => res.json())
-      .then((data) => setSuppliers(data));
-  }, []);
+    if (!loading) setHasLoaded(true);
+  }, [loading]);
+
   return (
     <main>
       <h1>Supplier Directory</h1>
-      <p>Start here. See README.md for the brief.</p>
-      <ul>
-        {suppliers.map((supplier) => (
-          <li key={supplier.id}>{supplier.name}</li>
-        ))}
-      </ul>
+
+      <Routes>
+        <Route path="/" element={<>{loading && <p>Loading...</p>}
+          {error && <p role="alert">Couldn't load suppliers: {error}. Is the mock API running? (<code>npm run mock-api</code>)</p>}
+          {hasLoaded && (
+            <>
+              <SupplierSearch />
+              {loading ? <p>Searching...</p> : <SuppliersList
+                suppliers={suppliers} />}
+              <SupplierForm />
+            </>
+          )}</>} />
+        <Route path="/suppliers/:id" element={<SupplierDetail />} />
+      </Routes>
     </main>
   );
 }

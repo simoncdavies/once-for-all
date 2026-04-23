@@ -8,12 +8,14 @@
     "test": "jest --watchAll",
     "typecheck": "tsc --noEmit",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
-    "mock-api": "json-server src/mocks/suppliers.json --port 3001"
+    "mock-api": "json-server src/mocks/suppliers.json --port 3001 --delay 500"
   },
   "dependencies": {
     "lodash": "^4.18.1",
+    "lucide-react": "^1.9.0",
     "react": "^18.3.1",
-    "react-dom": "^18.3.1"
+    "react-dom": "^18.3.1",
+    "react-router-dom": "^7.14.2"
   },
   "devDependencies": {
     "@babel/core": "^7.25.2",
@@ -32,6 +34,7 @@
     "babel-jest": "^29.7.0",
     "babel-loader": "^9.1.3",
     "css-loader": "^7.1.2",
+    "dotenv": "^17.4.2",
     "eslint": "^8.57.0",
     "eslint-plugin-react-hooks": "^4.6.2",
     "html-webpack-plugin": "^5.6.0",

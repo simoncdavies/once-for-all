@@ -1,8 +1,16 @@
 const path = require("path");
+const webpack = require("webpack");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
+const dotenv = require("dotenv");
 
 module.exports = (_env, argv) => {
-  const isProduction = argv.mode === "production";
+  const mode = argv.mode || "development";
+  const isProduction = mode === "production";
+
+  [`.env`, `.env.${mode}`, `.env.local`,
+    `.env.${mode}.local`].forEach((file) => {
+      dotenv.config({ path: file, override: true });
+    });
 
   return {
     entry: "./src/main.tsx",
@@ -47,6 +55,9 @@ module.exports = (_env, argv) => {
     plugins: [
       new HtmlWebpackPlugin({
         template: "./public/index.html",
+      }),
+      new webpack.DefinePlugin({
+        "process.env.API_URL": JSON.stringify(process.env.API_URL),
       }),
     ],
     devServer: {
